@@ -158,6 +158,34 @@
                     "cr": 15.0,
                     "kn": 0.5
                 }
+            },
+            {
+                "type": "lv2",
+                "plugin": "http://lsp-plug.in/plugins/lv2/limiter_stereo",
+                "name": "woofer_peak",
+                "control": {
+                    "th": 0.891,
+                    "lk": 5.0,
+                    "at": 1.0,
+                    "rt": 20.0,
+                    "ovs": 22,
+                    "alr": 0,
+                    "boost": 0
+                }
+            },
+            {
+                "type": "lv2",
+                "plugin": "http://lsp-plug.in/plugins/lv2/limiter_stereo",
+                "name": "tweeter_peak",
+                "control": {
+                    "th": 0.891,
+                    "lk": 5.0,
+                    "at": 1.0,
+                    "rt": 20.0,
+                    "ovs": 22,
+                    "alr": 0,
+                    "boost": 0
+                }
             }
         ],
         "links": [
@@ -171,10 +199,14 @@
             {"output": "convRW:Out", "input": "woofer_bp:in_r"},
             {"output": "woofer_bp:out_l", "input": "woofer_lim:in_l"},
             {"output": "woofer_bp:out_r", "input": "woofer_lim:in_r"},
-            {"output": "woofer_lim:out_l", "input": "copyLW:In"},
-            {"output": "woofer_lim:out_r", "input": "copyRW:In"},
-            {"output": "woofer_lim:out_l", "input": "copyLW2:In"},
-            {"output": "woofer_lim:out_r", "input": "copyRW2:In"},
+            {"output": "woofer_peak:out_l", "input": "copyLW:In"},
+            {"output": "woofer_peak:out_r", "input": "copyRW:In"},
+            {"output": "woofer_peak:out_l", "input": "copyLW2:In"},
+            {"output": "woofer_peak:out_r", "input": "copyRW2:In"},
+            {"output": "woofer_lim:out_l", "input": "woofer_peak:in_l"},
+            {"output": "woofer_lim:out_r", "input": "woofer_peak:in_r"},
+            {"output": "convLT:Out", "input": "tweeter_peak:in_l"},
+            {"output": "convRT:Out", "input": "tweeter_peak:in_r"},
         ],
         "inputs": [
             "bassex:in_l",
@@ -183,8 +215,8 @@
         "outputs": [
             "copyLW:Out",
             "copyRW:Out",
-            "convLT:Out",
-            "convRT:Out",
+            "tweeter_peak:out_l",
+            "tweeter_peak:out_r",
             "copyLW2:Out",
             "copyRW2:Out"
         ],

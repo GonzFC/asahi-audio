@@ -137,6 +137,34 @@
                     "cr": 15.0,
                     "kn": 0.5
                 }
+            },
+            {
+                "type": "lv2",
+                "plugin": "http://lsp-plug.in/plugins/lv2/limiter_stereo",
+                "name": "woofer_peak",
+                "control": {
+                    "th": 0.891,
+                    "lk": 5.0,
+                    "at": 1.0,
+                    "rt": 20.0,
+                    "ovs": 22,
+                    "alr": 0,
+                    "boost": 0
+                }
+            },
+            {
+                "type": "lv2",
+                "plugin": "http://lsp-plug.in/plugins/lv2/limiter_stereo",
+                "name": "tweeter_peak",
+                "control": {
+                    "th": 0.891,
+                    "lk": 5.0,
+                    "at": 1.0,
+                    "rt": 20.0,
+                    "ovs": 22,
+                    "alr": 0,
+                    "boost": 0
+                }
             }
         ],
         "links": [
@@ -150,16 +178,20 @@
             {"output": "convRW:Out", "input": "woofer_bp:in_r"},
             {"output": "woofer_bp:out_l", "input": "woofer_lim:in_l"},
             {"output": "woofer_bp:out_r", "input": "woofer_lim:in_r"},
+            {"output": "woofer_lim:out_l", "input": "woofer_peak:in_l"},
+            {"output": "woofer_lim:out_r", "input": "woofer_peak:in_r"},
+            {"output": "convLT:Out", "input": "tweeter_peak:in_l"},
+            {"output": "convRT:Out", "input": "tweeter_peak:in_r"},
         ],
         "inputs": [
             "bassex:in_l",
             "bassex:in_r"
         ],
         "outputs": [
-            "woofer_lim:out_l",
-            "woofer_lim:out_r",
-            "convLT:Out",
-            "convRT:Out"
+            "woofer_peak:out_l",
+            "woofer_peak:out_r",
+            "tweeter_peak:out_l",
+            "tweeter_peak:out_r"
         ],
         "capture.volumes": [
             {

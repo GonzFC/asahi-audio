@@ -178,6 +178,34 @@
                     "cr": 15.0,
                     "kn": 0.5
                 }
+            },
+            {
+                "type": "lv2",
+                "plugin": "http://lsp-plug.in/plugins/lv2/limiter_stereo",
+                "name": "fwoofer_peak",
+                "control": {
+                    "th": 0.891,
+                    "lk": 5.0,
+                    "at": 1.0,
+                    "rt": 20.0,
+                    "ovs": 22,
+                    "alr": 0,
+                    "boost": 0
+                }
+            },
+            {
+                "type": "lv2",
+                "plugin": "http://lsp-plug.in/plugins/lv2/limiter_stereo",
+                "name": "rwoofer_peak",
+                "control": {
+                    "th": 0.891,
+                    "lk": 5.0,
+                    "at": 1.0,
+                    "rt": 20.0,
+                    "ovs": 22,
+                    "alr": 0,
+                    "boost": 0
+                }
             }
         ],
         "links": [
@@ -195,16 +223,20 @@
             {"output": "fwoofer_bp:out_r", "input": "fwoofer_lim:in_r"},
             {"output": "rwoofer_bp:out_l", "input": "rwoofer_lim:in_l"},
             {"output": "rwoofer_bp:out_r", "input": "rwoofer_lim:in_r"},
+            {"output": "fwoofer_lim:out_l", "input": "fwoofer_peak:in_l"},
+            {"output": "fwoofer_lim:out_r", "input": "fwoofer_peak:in_r"},
+            {"output": "rwoofer_lim:out_l", "input": "rwoofer_peak:in_l"},
+            {"output": "rwoofer_lim:out_r", "input": "rwoofer_peak:in_r"},
         ],
         "inputs": [
             "bassex:in_l",
             "bassex:in_r"
         ],
         "outputs": [
-            "fwoofer_lim:out_l",
-            "fwoofer_lim:out_r",
-            "rwoofer_lim:out_l",
-            "rwoofer_lim:out_r"
+            "fwoofer_peak:out_l",
+            "fwoofer_peak:out_r",
+            "rwoofer_peak:out_l",
+            "rwoofer_peak:out_r"
         ],
         "capture.volumes": [
             {

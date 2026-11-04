@@ -91,6 +91,17 @@ simply unacceptable for anything but the most casual of listening.
 We aim to deliver a mostly flat response across the audible range that will faithfully reproduce
 source material without adding an excessive amount of colour.
 
+### Output limiting
+The amplifiers take integer samples, so anything a speaker graph sends at or over full scale is
+hard-clipped before the amp's own gain, where no speaker protection daemon can see it. The
+compressor that ends the shared graph shape (`woofer_lim`) lets transients through, so on
+bass-heavy music at 100 % the woofer feed of most graphs went over full scale hundreds of times a
+minute (up to +7 dBFS), which is audible as crackle or pops on bass hits. Every speaker graph
+therefore ends each output path with an LSP limiter: a true-peak brick wall at -1 dBFS with 5 ms of
+lookahead (-0.5 dBFS, sample peak, on the J700). Each path of a graph gets the same limiter, so the
+woofers and tweeters keep their alignment, and the speaker path gains about 7.6 ms of latency.
+`tests/speaker-graph-clips.py` checks this, and renders every graph offline to count clipped samples.
+
 ### J616s development reference
 
 [J616s evidence and device names](README.J616s.md) records verified capture
