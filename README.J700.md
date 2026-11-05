@@ -91,6 +91,31 @@ where they started, and reports the peak volume reached during each burst.
 A burst containing both a restore and an external change names both; only
 an unchanged burst entirely due to restore is omitted.
 
+## Measuring distortion
+
+`tools/sweep-hd.py` generates a log sweep per speaker and turns a
+recording of it into each speaker's SNR, 2nd to 5th harmonic distortion and
+octave-band SNR.  A harmonic that is less than 6 dB above the noise floor of
+the same impulse response is reported as "< floor": at the quiet levels a
+laptop measurement uses, that is the usual result, and the highest sample of
+a harmonic window is then only the noise floor.
+
+Comparing two capture chains (macOS against Linux, or the raw array
+`hw:AppleJ700AOP,1` against the microphone filter) needs the same acoustic
+level, which the band SNR shows independently of capture gain; the
+microphone filter alone adds +36 dB.  The sink volume is not a level: at
+35 % the graph is -29 dB at 1 kHz and -33 dB from 1.6 to 4 kHz (loudness
+compensation), and at 63 % about -16 dB.
+
+Measured 2026-11-05 at one placement with the array as the microphone and
+the same sweep at -20 dBFS: at sink volume 35 % Linux gave SNR 42/40 dB and
+"HD" -29 to -34 dB, the floor of a quiet recording, the same through the
+raw array and through the filter.  At a level 11 to 20 dB higher at the
+microphone, sink volume 63 %, it gives SNR 55/54 dB, HD2 -45/-45 dB and
+HD3 -46/-45 dB, again the floor; the speaker PCM fed directly at -36 dBFS
+gives 54/54, -45/-45 and -45/-44 dB.  The graph's own output, rendered
+offline at 35 %, 63 % and 100 %, carries harmonics below -76 dB.
+
 ## Headphones and headset microphone
 
 The 3.5 mm jack is a CS42L83 on `hw:AppleJ700,0`, described by the shared
@@ -128,8 +153,8 @@ F32LE) at 48 kHz only.  It is the card's only UCM device ("Mic").  Like the
 `alsa_input.platform-sound.RawMics`, hidden, and wrapped by the
 `node.software-dsp` rule in `firs/j700/mic.json`.  The result is the
 "MacBook Neo J700 Microphone" source, at the same priority as the other
-machines' microphones.  The filter averages the two capsules, adds +24 dB of
-make-up gain in two stages and applies the usual 120 Hz high-pass.  There is
+machines' microphones.  The filter averages the two capsules, adds +36 dB of
+make-up gain in two x8 stages and applies the usual 120 Hz high-pass.  There is
 no beamformer for a two-capsule array, and the gain is provisional until it
 is calibrated against the other machines.
 
