@@ -73,7 +73,7 @@ j%: core
 # (j316 for j416/j516/j616, j413 for j613); the microphone graphs stay.
 V2_SPEAKER_BOARDS = j316 j413 j616 j700
 
-install: aliases core j274 j293 j313 j314 j316 j413 j415 j375 j614 j616 j700
+install: aliases core j274 j293 j313 j314 j316 j413 j415 j375 j614 j616 j700 j714
 	for b in $(V2_SPEAKER_BOARDS); do rm -f $(DESTDIR)/$(DATA_DIR)/asahi-audio/$$b/graph.json; done
 	rm -f $(DESTDIR)/$(DATA_DIR)/asahi-audio/j700/48.wav
 
