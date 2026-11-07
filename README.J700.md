@@ -23,8 +23,9 @@ AOP's LEAP serializer, S32LE at 48 kHz only).  As on every other Mac the
 generic rule renames it `alsa_output.platform-sound.RawSpeakers` and the
 `node.software-dsp` rule wraps it in `firs/j700/graph.json`, which is the
 user-visible "MacBook Neo J700 Speakers" sink.  The graph has the usual shape
-(bankstown bass extension, equal-loudness compensation carrying the sink
-volume, a convolver per channel, the woofer band compressor and the final
+(bankstown bass extension, the LSP loudness compensator carrying the sink
+volume as a flat gain (its contour set to Flat, so every band follows the
+volume equally), a convolver per channel, the woofer band compressor and the final
 limiter).  `firs/j700/48.wav` is a first correction measured on the
 machine: an exponential sine sweep (100 Hz - 7.5 kHz, -50 dBFS on the wire)
 recorded by the internal low-power microphone and deconvolved; only the
@@ -104,8 +105,10 @@ Comparing two capture chains (macOS against Linux, or the raw array
 `hw:AppleJ700AOP,1` against the microphone filter) needs the same acoustic
 level, which the band SNR shows independently of capture gain; the
 microphone filter alone adds +36 dB.  The sink volume is not a level: at
-35 % the graph is -29 dB at 1 kHz and -33 dB from 1.6 to 4 kHz (loudness
-compensation), and at 63 % about -16 dB.
+35 % the graph was -29 dB at 1 kHz and -33 dB from 1.6 to 4 kHz (the
+ISO 226 loudness contour it then had), and at 63 % about -16 dB.  With the
+flat contour every band takes the same -30.9 dB at 35 % (the slider maps
+linearly onto -47.5..0 dB).
 
 Measured 2026-11-05 at one placement with the array as the microphone and
 the same sweep at -20 dBFS: at sink volume 35 % Linux gave SNR 42/40 dB and

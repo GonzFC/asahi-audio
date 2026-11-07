@@ -24,6 +24,7 @@
                 "name": "ell",
                 "control": {
                     "enabled": 1,
+                    "std": 0,
                     "input": 1.0,
                     "fft": 2
                 }
@@ -34,6 +35,7 @@
                 "name": "elr",
                 "control": {
                     "enabled": 1,
+                    "std": 0,
                     "input": 1.0,
                     "fft": 2
                 }
