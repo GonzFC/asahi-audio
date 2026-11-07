@@ -57,7 +57,15 @@ j%: core
 	install -pm0644 -t $(DESTDIR)/$(DATA_DIR)/asahi-audio/$@/ $(wildcard firs/$@/*)
 
 
+# Boards whose speakers speakerguardd v2 drives from the Mac's own Apple tuning
+# (Plan A, voicing_pre): no asahi-audio speaker graph is installed for them.
+# Their FIRs stay where an alias graph of another board still uses them
+# (j316 for j416/j516/j616, j413 for j613); the microphone graphs stay.
+V2_SPEAKER_BOARDS = j316 j413 j616 j700
+
 install: aliases core j274 j293 j313 j314 j316 j413 j415 j375 j614 j616 j700
+	for b in $(V2_SPEAKER_BOARDS); do rm -f $(DESTDIR)/$(DATA_DIR)/asahi-audio/$$b/graph.json; done
+	rm -f $(DESTDIR)/$(DATA_DIR)/asahi-audio/j700/48.wav
 
 uninstall:
 	rm -rf $(DESTDIR)/$(DATA_DIR)/asahi-audio/
