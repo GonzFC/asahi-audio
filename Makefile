@@ -48,6 +48,7 @@ core:
 	install -pm0644 conf/asahi-lock-volume.lua $(DESTDIR)/$(DATA_DIR)/wireplumber/scripts/device/asahi-lock-volume.lua
 	install -pm0644 conf/asahi-unplugged-routes.lua $(DESTDIR)/$(DATA_DIR)/wireplumber/scripts/device/asahi-unplugged-routes.lua
 	install -pm0644 conf/asahi-hide-devices.lua $(DESTDIR)/$(DATA_DIR)/wireplumber/scripts/device/asahi-hide-devices.lua
+	install -pm0644 conf/asahi-keep-profile.lua $(DESTDIR)/$(DATA_DIR)/wireplumber/scripts/device/asahi-keep-profile.lua
 	install -pm0644 conf/asahi-restore-volume.lua $(DESTDIR)/$(DATA_DIR)/wireplumber/scripts/node/asahi-restore-volume.lua
 	install -pm0644 conf/pipewire.conf $(DESTDIR)/$(DATA_DIR)/pipewire/pipewire.conf.d/99-asahi.conf
 	install -pm0644 conf/pipewire.conf $(DESTDIR)/$(DATA_DIR)/pipewire/pipewire-pulse.conf.d/99-asahi.conf
