@@ -24,7 +24,7 @@ aliases-j316:
 	make -f $$PWD/Makefile -C firs/j316 graph-j416.json mic-j416.json graph-j516.json mic-j516.json
 
 aliases-j413:
-	make -f $$PWD/Makefile -C firs/j413 graph-j613.json mic-j613.json
+	make -f $$PWD/Makefile -C firs/j413 graph-j613.json mic-j613.json graph-j713.json mic-j713.json
 
 aliases-j415:
 	make -f $$PWD/Makefile -C firs/j415 graph-j615.json mic-j615.json
