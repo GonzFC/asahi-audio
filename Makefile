@@ -6,7 +6,7 @@ DATA_DIR ?= $(PREFIX)/share/
 
 all: aliases
 
-aliases: aliases-j274 aliases-j293 aliases-j314 aliases-j316 aliases-j375 aliases-j413 aliases-j415
+aliases: aliases-j274 aliases-j293 aliases-j314 aliases-j316 aliases-j375 aliases-j413 aliases-j415 aliases-j714
 
 aliases-j274:
 	make -f $$PWD/Makefile -C firs/j274 graph-j473.json graph-j474.json
@@ -19,6 +19,16 @@ aliases-j293:
 
 aliases-j314:
 	make -f $$PWD/Makefile -C firs/j314 graph-j414.json mic-j414.json graph-j504.json mic-j504.json graph-j514.json mic-j514.json
+
+# J714 (MacBook Pro 14", M5 Max) takes the J314 tuning. Its ADT puts the
+# speakers in slots LW1 RW1 LW2 RW2 LT RT, so the tweeter outputs move last.
+aliases-j714:
+	make -f $$PWD/Makefile -C firs/j314 graph-j714.json
+
+graph-j714.json: graph.json
+	sed -E -e "s/([^/][jJ])314/\1714/g" \
+		-e '/^ *"tweeter_peak:out_[lr]",$$/d' \
+		-e 's/^( *)"copyRW2:Out"$$/\1"copyRW2:Out",\n\1"tweeter_peak:out_l",\n\1"tweeter_peak:out_r"/' $< >$@
 
 aliases-j316:
 	make -f $$PWD/Makefile -C firs/j316 graph-j416.json mic-j416.json graph-j516.json mic-j516.json
@@ -65,7 +75,7 @@ j%: core
 # (j316 for j416/j516/j616, j413 for j613); the microphone graphs stay.
 V2_SPEAKER_BOARDS = j316 j413 j616 j700
 
-install: aliases core j274 j293 j313 j314 j316 j413 j415 j375 j614 j616 j700
+install: aliases core j274 j293 j313 j314 j316 j413 j415 j375 j614 j616 j700 j714
 	for b in $(V2_SPEAKER_BOARDS); do rm -f $(DESTDIR)/$(DATA_DIR)/asahi-audio/$$b/graph.json; done
 	rm -f $(DESTDIR)/$(DATA_DIR)/asahi-audio/j700/48.wav
 
