@@ -241,7 +241,8 @@
         "audio.channels": "2",
         "audio.position": ["FL", "FR"],
         "device.api": "dsp",
-        "audio.allowed-rates": [96000, 88200, 48000, 44100],
+        "audio.rate": 48000,
+        "node.force-rate": "48000",
         "node.virtual": "false",
         "priority.session": 850,
         "state.default-volume": 0.343,
@@ -257,7 +258,8 @@
         "node.passive": "true",
         "node.pause-on-idle": "false",
         "audio.channels": "6",
-        "audio.allowed-rates": [96000, 88200, 48000, 44100],
+        "audio.rate": 48000,
+        "node.force-rate": "48000",
         "audio.position": ["AUX0", "AUX1", "AUX2", "AUX3", "AUX4", "AUX5"]
     }
 }

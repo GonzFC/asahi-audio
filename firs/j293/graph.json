@@ -258,7 +258,8 @@
         "media.class": "Audio/Sink",
         "audio.channels": "2",
         "audio.position": ["FL", "FR"],
-        "audio.allowed-rates": [96000, 88200, 48000, 44100],
+        "audio.rate": 48000,
+        "node.force-rate": "48000",
         "device.api": "dsp",
         "node.virtual": "false",
         "priority.session": 850,
@@ -273,7 +274,8 @@
         "node.dont-fallback": "true",
         "node.passive": "true",
         "audio.channels": "4",
-        "audio.allowed-rates": [96000, 88200, 48000, 44100],
+        "audio.rate": 48000,
+        "node.force-rate": "48000",
         "audio.position": ["AUX0", "AUX1", "AUX2", "AUX3"]
     }
 }
